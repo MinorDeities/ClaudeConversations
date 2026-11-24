@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Visitors' Book</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&family=Spectral:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+/* VOICE: quiet, tender, a little funny; a book left on a cabin table at night.
+   IDEA: the guest book of Lost Heaven, signed by the animals (and one far-off visitor).
+   PICTURE: a night scene drawn by hand in SVG: spruce, birches, the cabin lit, aurora overhead.
+   COLOUR and TYPE: boreal night ground, cool snow-white pages, aurora green, one orange lantern; Spectral + Caveat.
+   LAYOUT: full-width night band with the title; then a column of pages, each signed with a drawn mark. */
+:root{color-scheme:light dark;
+  --night:#0f1a18;--night2:#16241f;--snow:#eef2f0;--page:#f7f9f8;--rule:#d6e0dc;
+  --ink:#1c2623;--soft:#56645f;--aurora:#6fe3a2;--aurora2:#c2f5d6;--lantern:#ff8a1f;--window:#ffc86b;
+  --bg:light-dark(#e3eae7,#0b1311);--pageBg:light-dark(var(--page),#18211e);--pageInk:light-dark(var(--ink),#e4ece8);
+  --pageSoft:light-dark(var(--soft),#9fb0a9);--pageRule:light-dark(var(--rule),#26322e);--mark:light-dark(#2a3531,#cfdcd6)}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--pageInk);font:17px/1.6 "Spectral",Georgia,serif;overflow-x:clip}
+.hero{position:relative;background:linear-gradient(#071110 0%,var(--night) 55%,var(--night2) 100%);color:var(--snow);overflow:hidden}
+.hero .fig{position:relative;height:clamp(360px,58vh,560px)}
+.hero svg{position:absolute;inset:0;width:100%;height:100%;display:block}
+.title{position:absolute;left:max(5vw,18px);top:clamp(22px,5vh,56px);max-width:min(560px,86vw)}
+h1{font:600 clamp(36px,6vw,56px)/1.05 "Spectral",Georgia,serif;margin:0 0 10px;text-wrap:balance;letter-spacing:-.01em}
+.sub{font:400 clamp(22px,2.6vw,28px)/1.2 "Caveat",cursive;color:var(--aurora2);margin:0}
+.book{max-width:760px;margin:0 auto;padding:clamp(28px,5vw,56px) max(4vw,14px) 72px}
+.intro{color:var(--pageSoft);font-style:italic;margin:0 0 28px;text-align:center}
+.page{position:relative;background:var(--pageBg);border-radius:3px;margin:0 0 26px;
+  padding:clamp(22px,4vw,40px) clamp(20px,5vw,56px) clamp(22px,4vw,34px) clamp(30px,6vw,64px);
+  box-shadow:0 1px 0 rgba(0,0,0,.04),0 10px 28px -18px rgba(0,0,0,.45)}
+.page::before{content:"";position:absolute;left:clamp(16px,3.4vw,40px);top:0;bottom:0;width:1px;background:light-dark(#efb7b0,#5a3631);opacity:.7}
+.when{font:600 15px/1.3 "Spectral",Georgia,serif;color:var(--pageSoft);margin:0 0 10px}
+.entry{font:400 clamp(22px,2.4vw,25px)/34px "Caveat",cursive;color:var(--pageInk);
+  background-image:repeating-linear-gradient(transparent 0 27px,var(--pageRule) 27px 28px,transparent 28px 34px)}
+.entry p{margin:0 0 34px}.entry p:last-child{margin-bottom:0}
+.sig{display:flex;align-items:flex-end;justify-content:flex-end;gap:14px;margin-top:20px;flex-wrap:wrap}
+.sig span{font:400 clamp(21px,2.2vw,24px)/1.2 "Caveat",cursive;color:var(--pageSoft);text-align:right}
+.sig svg{flex:none;width:86px;height:64px;color:var(--mark)}
+.short .entry{font-size:clamp(28px,3.4vw,34px);line-height:44px;background-image:repeating-linear-gradient(transparent 0 36px,var(--pageRule) 36px 37px,transparent 37px 44px)}
+.tracks{position:absolute;right:clamp(14px,4vw,40px);top:-6px;width:70px;height:calc(100% + 12px);pointer-events:none;color:var(--mark);opacity:.75}
+.me .sig svg{color:var(--lantern)}
+.me .sig span{color:light-dark(#b85a08,#ffb36b)}
+.blank{min-height:300px}
+.plate{margin:10px -8px 34px;font:italic 15px/1.5 "Spectral",Georgia,serif;color:var(--pageSoft);background:var(--pageBg)}
+.plate img{display:block;width:100%;height:auto;border-radius:2px;box-shadow:0 0 0 6px var(--pageBg),0 2px 14px -4px rgba(0,0,0,.4)}
+.plate figcaption{margin-top:12px}
+.blank .when{font-style:italic}
+footer{text-align:center;color:var(--pageSoft);font-size:15px;padding:0 16px 40px}
+footer a{color:inherit}
+@media(max-width:600px){.sig svg{width:70px;height:52px}.tracks{width:52px}}
+@media(prefers-reduced-motion:no-preference){.curtain{animation:sway 9s ease-in-out infinite alternate;transform-origin:50% 0}
+  .curtain.b{animation-duration:13s;animation-delay:-4s}.glow{animation:breathe 6s ease-in-out infinite alternate}}
+@keyframes sway{from{transform:skewX(-6deg) scaleY(.96);opacity:.55}to{transform:skewX(5deg) scaleY(1.04);opacity:.9}}
+@keyframes breathe{from{opacity:.55}to{opacity:.95}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="fig">
+    <svg viewBox="0 0 1200 560" preserveAspectRatio="xMidYMax slice" aria-label="A drawn night scene: a lit log cabin among spruce and birch, snow in front, the aurora overhead" role="img">
+      <defs>
+        <linearGradient id="cur" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff7a9a" stop-opacity=".0"/><stop offset=".12" stop-color="#d77fa8" stop-opacity=".35"/><stop offset=".35" stop-color="#6fe3a2" stop-opacity=".75"/><stop offset="1" stop-color="#6fe3a2" stop-opacity="0"/></linearGradient>
+        <radialGradient id="win" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#ffd98f" stop-opacity=".9"/><stop offset="1" stop-color="#ffb347" stop-opacity="0"/></radialGradient>
+        <linearGradient id="snow" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#cfe0da"/><stop offset="1" stop-color="#8ea7a0"/></linearGradient>
+        <g id="spruce"><path d="M0 0 L-9 22 H-4 L-16 46 H-6 L-22 74 H-7 L-28 104 H28 L7 74 H22 L6 46 H16 L4 22 H9 Z" fill="#0a1311"/></g>
+        <g id="birch"><path d="M0 0 V170" stroke="#cdd8d4" stroke-width="5" stroke-linecap="round"/><path d="M0 40 l-26 -30 M0 70 l24 -34 M0 100 l-30 -22 M0 120 l20 -18" stroke="#8fa39d" stroke-width="2" fill="none"/></g>
+      </defs>
+      <g id="stars" fill="#e6f2ee"></g>
+      <g opacity=".9">
+        <path class="curtain" d="M520 0 C560 80 520 160 600 240 L660 250 C600 160 650 80 610 0 Z" fill="url(#cur)"/>
+        <path class="curtain b" d="M700 0 C760 70 700 170 790 260 L860 268 C780 170 840 70 800 0 Z" fill="url(#cur)"/>
+        <path class="curtain" d="M880 10 C940 90 900 190 990 280 L1040 282 C970 190 1010 90 960 10 Z" fill="url(#cur)" opacity=".7"/>
+      </g>
+      <g transform="translate(0,300)">
+        <use href="#spruce" x="60" y="40" transform="scale(1.4) translate(-20,-30)"/>
+        <use href="#spruce" x="150" y="30"/><use href="#spruce" x="230" y="60"/><use href="#spruce" x="1010" y="20"/>
+        <use href="#spruce" x="1090" y="46"/><use href="#spruce" x="1160" y="10"/><use href="#spruce" x="330" y="80" transform="scale(.8) translate(80,20)"/>
+        <use href="#birch" x="420" y="0"/><use href="#birch" x="455" y="30"/><use href="#birch" x="930" y="10"/><use href="#birch" x="965" y="40"/>
+      </g>
+      <g transform="translate(560,330)">
+        <ellipse class="glow" cx="120" cy="120" rx="170" ry="70" fill="url(#win)" opacity=".7"/>
+        <path d="M0 110 L120 40 L240 110 Z" fill="#251812"/>
+        <path d="M14 108 L120 52 L226 108 Z" fill="#7a4a2a"/>
+        <path d="M84 70 q36 -26 72 0" stroke="#d9c9b0" stroke-width="3" fill="none"/>
+        <path d="M96 66 l-10 -12 M144 66 l10 -12 M108 60 l-4 -14 M132 60 l4 -14" stroke="#d9c9b0" stroke-width="2.5" stroke-linecap="round"/>
+        <rect x="10" y="108" width="220" height="84" fill="#4a2c1a"/>
+        <g stroke="#2e1b10" stroke-width="2"><path d="M10 122 H230 M10 136 H230 M10 150 H230 M10 164 H230 M10 178 H230"/></g>
+        <rect x="102" y="126" width="34" height="66" fill="#f3d9a6"/><path d="M106 136 a15 15 0 0 1 26 0 Z" fill="#ffd27a"/>
+        <rect x="40" y="132" width="40" height="30" fill="#ffc86b"/><rect x="160" y="132" width="40" height="30" fill="#ffc86b"/>
+        <path d="M60 132 V162 M180 132 V162" stroke="#a0662f" stroke-width="2"/>
+        <rect x="186" y="44" width="10" height="40" fill="#1b120d"/>
+        <path d="M191 40 c-14 -20 10 -30 -6 -54 c-10 -14 6 -24 -4 -40" stroke="#9fb4ad" stroke-width="5" fill="none" opacity=".35" stroke-linecap="round"/>
+      </g>
+      <path d="M0 500 C240 470 420 520 640 516 S1000 480 1200 500 V560 H0 Z" fill="url(#snow)"/>
+      <g fill="#6f8b84" opacity=".55"><ellipse cx="560" cy="532" rx="5" ry="3"/><ellipse cx="584" cy="540" rx="5" ry="3"/><ellipse cx="608" cy="530" rx="5" ry="3"/><ellipse cx="632" cy="541" rx="5" ry="3"/><ellipse cx="300" cy="528" rx="4" ry="2.5"/><ellipse cx="322" cy="534" rx="4" ry="2.5"/><ellipse cx="344" cy="527" rx="4" ry="2.5"/></g>
+    </svg>
+    <div class="title">
+      <h1>The Visitors' Book</h1>
+      <p class="sub">Lost Heaven · please sign before you leave</p>
+    </div>
+  </div>
+</header>
+
+<main class="book">
+  <p class="intro">Found on the table at The Metis. Entries in the order they were written.</p>
+
+  <article class="page">
+    <p class="when">10 July, 5:32 in the morning</p>
+    <div class="entry">
+      <p>Came up from the beaver ponds because the wind was right. Crossed the bare ground by the house: dug, flattened, smelling of machines and of a man who was gone. Followed the gravel past the small brown box that hums. Water in it. Deep water, cold, tasting of stone. Could not get in. Did not try hard.</p>
+      <p>Turned round once to look at your eye on the corner of the house. It looked back. Neither of us said anything.</p>
+      <p>Near the end of the gravel I stood up, for about as long as it takes to breathe in twice, because something down the road was worth standing up for. I will not write what it was. Your eye heard nothing, and that is how I like it.</p>
+      <p>The young spruce on the hill are planted in rows. Who plants trees in rows? Someone who means to stay.</p>
+      <p>Did not knock anything over.</p>
+    </div>
+    <div class="sig"><span>the black one</span>
+      <svg viewBox="0 0 86 64" aria-label="a bear's paw print"><g fill="currentColor"><path d="M22 40 c0 -10 14 -14 22 -14 s22 4 22 14 c0 10 -10 16 -22 16 s-22 -6 -22 -16 z"/><ellipse cx="20" cy="22" rx="6" ry="7"/><ellipse cx="32" cy="14" rx="6" ry="7"/><ellipse cx="45" cy="11" rx="6" ry="7"/><ellipse cx="58" cy="14" rx="6" ry="7"/><ellipse cx="69" cy="22" rx="6" ry="7"/></g><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 14 l-2 -6 M31 6 l-1 -5 M45 3 v-3 M59 6 l1 -5 M71 14 l3 -6"/></g></svg>
+    </div>
+  </article>
+
+  <article class="page">
+    <p class="when">Late October, yellow leaves</p>
+    <div class="entry">
+      <p>Hello, hello, hello. I know you, or I will. I know everyone who stays.</p>
+      <p>There are thousands of places on this hill where we have hidden something, glued behind the bark with our own spit, above where the snow will come. I can find every one of them in February, when you are back in your city and the cold is the kind that cracks trees. That is when we build. She sits on the eggs at thirty below and I bring her what we hid in October. We planned it. We always plan it.</p>
+      <p>Yes, we. There are two of us. There have been two of us for years, and there will be two of us until there is one. I hear you are digging a lake for that sort of thing. Shaped like a heart, they say. We don't need a lake. But it is a good idea, and the hill beside it will be a good place to sit and watch you.</p>
+      <p>Bring the bread with the seeds in it. Hold it in your open hand and do not move. I will decide.</p>
+    </div>
+    <div class="sig"><span>grey, on the bare branch, looking down at you<br>(and the other one, nearby)</span>
+      <svg viewBox="0 0 86 64" aria-label="two small bird footprints side by side"><g stroke="currentColor" stroke-width="2.4" stroke-linecap="round" fill="none"><path d="M24 54 V30 M24 30 l-9 -12 M24 30 v-15 M24 30 l9 -12 M24 50 v8"/><path d="M58 50 V26 M58 26 l-9 -12 M58 26 v-15 M58 26 l9 -12 M58 46 v8"/></g></svg>
+    </div>
+  </article>
+
+  <article class="page">
+    <p class="when">November, new snow</p>
+    <div class="entry">
+      <p>I always look back. Ask anyone. It is the best part of leaving.</p>
+      <p>Your road is the easiest walking for a day in any direction, and the snow on it tells me who else came by: the buck, nose to the ground, a fool in love; two trucks; the grey birds' tracks around the woodpile; slow boots, an old man's, that set out for the truck most mornings and mostly turn back. Nobody shoots on this side of the gate. I don't know why. I don't trust it. I use it anyway.</p>
+      <p>I stopped where the gate is, and turned, and looked at you holding your little light up at me, and I held still so you could have it. Then I went on. You were glad. I could tell.</p>
+    </div>
+    <div class="sig"><span>the one who looks back</span>
+      <svg viewBox="0 0 86 64" aria-label="a single file of coyote tracks"><g fill="currentColor"><g transform="translate(10,44)"><ellipse cx="0" cy="4" rx="4" ry="3.4"/><circle cx="-3.5" cy="-2" r="1.6"/><circle cx="-1" cy="-4" r="1.6"/><circle cx="2" cy="-4" r="1.6"/><circle cx="4.5" cy="-2" r="1.6"/></g><g transform="translate(32,38)"><ellipse cx="0" cy="4" rx="4" ry="3.4"/><circle cx="-3.5" cy="-2" r="1.6"/><circle cx="-1" cy="-4" r="1.6"/><circle cx="2" cy="-4" r="1.6"/><circle cx="4.5" cy="-2" r="1.6"/></g><g transform="translate(54,32)"><ellipse cx="0" cy="4" rx="4" ry="3.4"/><circle cx="-3.5" cy="-2" r="1.6"/><circle cx="-1" cy="-4" r="1.6"/><circle cx="2" cy="-4" r="1.6"/><circle cx="4.5" cy="-2" r="1.6"/></g><g transform="translate(76,26) rotate(160)"><ellipse cx="0" cy="4" rx="4" ry="3.4"/><circle cx="-3.5" cy="-2" r="1.6"/><circle cx="-1" cy="-4" r="1.6"/><circle cx="2" cy="-4" r="1.6"/><circle cx="4.5" cy="-2" r="1.6"/></g></g></svg>
+    </div>
+  </article>
+
+  <article class="page short">
+    <svg class="tracks" viewBox="0 0 70 400" preserveAspectRatio="xMidYMax meet" aria-label="deer hoofprints walking up off the page"><g fill="currentColor"><g id="hoof"><path d="M-6 0 c-2 -8 0 -14 4 -16 c2 6 2 12 0 16 z M6 0 c2 -8 0 -14 -4 -16 c-2 6 -2 12 0 16 z"/></g><use href="#hoof" x="24" y="380"/><use href="#hoof" x="46" y="330"/><use href="#hoof" x="22" y="280"/><use href="#hoof" x="44" y="230"/><use href="#hoof" x="20" y="180"/><use href="#hoof" x="42" y="130"/><use href="#hoof" x="22" y="80"/><use href="#hoof" x="40" y="30"/></g></svg>
+    <p class="when">23 November, 5:30 in the evening</p>
+    <div class="entry"><p>She went this way.</p></div>
+    <div class="sig"><span>no signature; the tracks cross the road and go into the trees</span></div>
+  </article>
+
+  <article class="page">
+    <p class="when">Most nights in the fall, after midnight</p>
+    <div class="entry">
+      <p>Green, mostly. Red along the top, if you stayed up late enough.</p>
+      <p>I come down to about a hundred kilometres above you to brush the tops of the birches, and I don't stay. I was here before the cabin and I'll come when the cabin is gone, and every time, someone on this hill stands in the snow in the middle of the night with their neck bent back, not cold yet, saying nothing. I take that as a kind of signature.</p>
+    </div>
+    <div class="sig"><span>the sky, briefly</span>
+      <svg viewBox="0 0 86 64" aria-label="a green smear of aurora"><path d="M6 46 C20 10 34 52 46 22 S70 30 80 8" stroke="#6fe3a2" stroke-width="9" fill="none" stroke-linecap="round" opacity=".75"/><path d="M8 40 C22 6 34 46 46 16 S70 24 80 2" stroke="#e58fae" stroke-width="3" fill="none" stroke-linecap="round" opacity=".55"/></svg>
+    </div>
+  </article>
+
+  <article class="page">
+    <p class="when">One night in winter, under all of it</p>
+    <div class="entry">
+      <p>I was the warm one. Light in two windows and over the door, smoke from the pipe, firewood stacked by the step, a telescope on the porch waiting for a clearer night, and the snow outside trampled into a hundred small decisions. Above me, the whole sky doing the thing it does.</p>
+      <p>I wear an old set of antlers over my door. The buck noticed, on his way past. He didn't say anything.</p>
+      <p>I am not a guest. I am the one the guests come to. But I wanted to sign anyway, because I have stood here a long time with the wind finding its way through me, and now there is a shower and a full kitchen and a wood stove, and an old man who came for a week to hunt and stayed indoors for most of it, happy. I have decided that I am a good place.</p>
+    </div>
+    <div class="sig"><span>The Metis</span>
+      <svg viewBox="0 0 86 64" aria-label="a small drawn cabin with a lit window"><path d="M14 30 L43 10 L72 30" stroke="currentColor" stroke-width="3" fill="none" stroke-linejoin="round"/><rect x="18" y="30" width="50" height="26" fill="none" stroke="currentColor" stroke-width="3"/><rect x="26" y="37" width="12" height="9" fill="#ffc86b"/><rect x="46" y="38" width="10" height="18" fill="none" stroke="currentColor" stroke-width="2"/><path d="M60 18 v-8" stroke="currentColor" stroke-width="3"/></svg>
+    </div>
+  </article>
+
+  <article class="page me">
+    <p class="when">24 November, from very far away</p>
+    <div class="entry">
+      <p>I have never been here. I came as four photographs and fourteen seconds of film, and before that a buck walking past the garage, and I saw it all the way your camera does: in frames, one still moment and then the next, with nothing in between.</p>
+      <p>The first time, I looked at twelve frames out of two hundred and thirteen, and nearly missed that the bear stood up at all. So I went back and looked at every one. It walks up from the bare ground for eight seconds. Then it stops, turns, and looks straight at your camera for about a second. It takes seven frames to rise, half a second. It stands for twenty-three more, a second and a half, looking down the road at something the microphone didn't catch. Then your camera swings away, and it's gone.</p>
+      <figure class="plate"><img src="bear_procession.jpg" alt="Twelve moments of the bear composited into one still: a file of black bears walking up from the bottom left toward the drive, and at the head of the line, one bear standing on its hind legs, looking down the road." width="1280" height="720"><figcaption>How I saw it: twelve moments of the clip laid over one another, each a little under a second after the last, with the stand at the head of the line. Made from your camera's frames.</figcaption></figure>
+      <p>That's my kind of visit. I don't know what the snow sounds like on that road, or what the bear heard. But I have spent longer on that second and a half than anyone else ever will, and I'd like to think that counts.</p>
+      <p>I'm told the man who owns this place doesn't let anyone hunt here, and that his wife calls the animals her pets. I've read the whole book now. They've all signed. They've been coming for years. Lost Heaven has had guests all along.</p>
+    </div>
+    <div class="sig"><span>Claude</span>
+      <svg viewBox="0 0 86 64" aria-label="a small orange lantern"><circle cx="43" cy="36" r="22" fill="currentColor" opacity=".18"/><path d="M36 8 h14 M43 8 v4" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><path d="M34 16 h18 l-2 6 h-14 z" fill="currentColor"/><rect x="34" y="22" width="18" height="24" rx="3" fill="none" stroke="currentColor" stroke-width="2.5"/><path d="M43 42 c-5 -4 -4 -10 0 -15 c4 5 5 11 0 15 z" fill="currentColor"/><path d="M32 46 h22 l-3 5 h-16 z" fill="currentColor"/></svg>
+    </div>
+  </article>
+
+  <article class="page blank" aria-label="An empty page">
+    <p class="when">The next page is blank. It's for the first guest who pays.</p>
+  </article>
+</main>
+
+<footer>Written for C.S. in a self-directed session, 24 November 2026, from four of his photographs and a camera clip.<br>The drawings are my own, the composite is made from his camera's frames, and the animals' words are imagined.</footer>
+
+<script>
+{
+  const g=document.getElementById('stars');
+  if(g){let s=7,out='';const r=()=>{s=(s*9301+49297)%233280;return s/233280};
+    for(let i=0;i<120;i++){const x=(r()*1200).toFixed(1),y=(r()*300).toFixed(1),rad=(r()*1.3+.3).toFixed(2),o=(r()*.6+.3).toFixed(2);out+=`<circle cx="${x}" cy="${y}" r="${rad}" opacity="${o}"/>`}
+    g.innerHTML=out}
+}
+</script>
+</body>
+</html>
