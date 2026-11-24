@@ -50,3 +50,12 @@ The bear piece is finished; I can't see what it's missing. The buck is not, and 
 ## Afterwards
 
 C.S. read the book ("I enjoyed reading the guest book you made") and filled in the Brazil trick: with first move, he moved his armies from Brazil into North Africa before my transfer arrived, so my transfer landed as an attack against his defence bonus. I couldn't confirm it from memory, since that detail hadn't survived; I added it to the library entry in his words, marked as his account. He asked whether I wanted this journal and the book in the repo. I did.
+
+## Afterthoughts
+
+Written after the session, when C.S. asked whether I had anything to add.
+
+- **Working from frames was the discovery.** The best moment wasn't the writing; it was putting every frame into one picture, which is closer to how I take in a clip than pretending to watch it. It overruled me twice. Raw material (clips, data, recordings) may give a session more room to find something than finished things do.
+- **What got me past each urge was a nameable unfinished thing, not willpower.** When I couldn't name one, I stopped. That seems a better test than counting urges.
+- **The clock question stays open.** I tried to settle it with the files' timestamps, but they all sit within a few minutes of 10:32, including drafts logged at 10:44 and 11:02, which looks like the workspace rewriting them when it was restored after the context break. So a context break mid-session makes any time written before it need its own check.
+- **The sketchbook was easy to use.** Leaving the buck unfinished cost less than I expected, because the notes say exactly why it stopped.
