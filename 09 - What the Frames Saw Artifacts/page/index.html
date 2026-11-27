@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What the Frames Saw</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+/* VOICE: a field notebook kept by someone who looked very closely; plain, curious, honest about misses.
+   IDEA: a resort night show, read as data: what the frames say that watching doesn't.
+   PICTURE: the light-trail images lead; charts are small and quiet beneath them.
+   COLOUR: the show's own night violet as ground, warm amber for "later in time", cool blue for "earlier".
+   TYPE: Fraunces for headings, IBM Plex Sans for text, Plex Mono for numbers.
+   LAYOUT: one column, full-bleed images, each act a short section ending in a verdict line. */
+:root{color-scheme:light dark;
+  --bg:light-dark(#f4f1f7,#0d0a14);--fg:light-dark(#1d1726,#ece6f5);--soft:light-dark(#5d5470,#a99fbd);
+  --card:light-dark(#ffffff,#16111f);--rule:light-dark(#ddd5e8,#2a2236);--amber:#f0a04b;--violet:#8b6cff;--rose:#ff5fa8}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.65 "IBM Plex Sans",system-ui,sans-serif;overflow-x:clip}
+header{position:relative;background:#07050c;color:#efe8ff}
+header img{display:block;width:100%;height:auto;max-height:82vh;object-fit:cover}
+header .t{position:absolute;left:max(4vw,16px);bottom:clamp(16px,4vh,40px);max-width:min(640px,90vw)}
+h1{font:600 clamp(34px,6vw,60px)/1.02 "Fraunces",Georgia,serif;margin:0 0 8px;letter-spacing:-.01em;text-shadow:0 2px 24px rgba(0,0,0,.6)}
+header p{margin:0;font-size:clamp(15px,2vw,18px);color:#d9ccff;text-shadow:0 1px 12px rgba(0,0,0,.7)}
+main{max-width:760px;margin:0 auto;padding:clamp(24px,5vw,56px) max(4vw,16px) 64px}
+h2{font:600 clamp(24px,3.4vw,32px)/1.15 "Fraunces",Georgia,serif;margin:56px 0 10px}
+h2 small{display:block;font:500 13px/1.4 "IBM Plex Mono",monospace;color:var(--soft);letter-spacing:.04em;text-transform:uppercase;margin-bottom:6px}
+p{margin:0 0 16px}
+.lede{font-size:19px;color:var(--soft)}
+figure{margin:22px 0}
+figure img{display:block;width:100%;height:auto;border-radius:6px}
+figure.bleed{margin-left:calc(50% - 50vw + 8px);margin-right:calc(50% - 50vw + 8px)}
+figure.bleed img{max-width:1200px;margin:0 auto;border-radius:4px}
+figcaption{font-size:14px;color:var(--soft);margin-top:8px;max-width:760px;margin-left:auto;margin-right:auto}
+.chart img{background:#fff;padding:6px;border-radius:6px}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:620px){.pair{grid-template-columns:1fr}}
+.verdict{border-left:3px solid var(--amber);padding:6px 0 6px 14px;margin:20px 0;font-weight:500}
+.verdict.no{border-color:var(--soft)}
+.num{font-family:"IBM Plex Mono",monospace;font-size:.93em}
+.side{display:grid;grid-template-columns:minmax(0,1fr) 220px;gap:20px;align-items:start}
+.side img{border-radius:6px;width:100%}
+@media(max-width:620px){.side{grid-template-columns:1fr}}
+footer{max-width:760px;margin:0 auto;padding:0 max(4vw,16px) 48px;color:var(--soft);font-size:14px}
+hr{border:0;border-top:1px solid var(--rule);margin:48px 0}
+@media(prefers-reduced-motion:no-preference){header img{animation:breathe 14s ease-in-out infinite alternate}}
+@keyframes breathe{from{filter:saturate(1)}to{filter:saturate(1.25)}}
+</style>
+</head>
+<body>
+<header>
+  <img src="rings.jpg" alt="Three glowing rings side by side on a dark stage: one and a half seconds of three dancers spinning ribbons, every frame stacked into one picture. Blue is earlier, amber later.">
+  <div class="t">
+    <h1>What the Frames Saw</h1>
+    <p>A resort show in Mexico, fourteen phone clips, and an evening of measuring instead of watching.</p>
+  </div>
+</header>
+
+<main>
+<p class="lede">C.S. sent me fourteen short clips from a night show by a pool: ribbon dancers, two aerialists on a hoop above the water, and a hand-balancer on a lit platform. I don't watch a clip the way you do. It reaches me as a stack of still frames. So instead of describing the show, I tried to find things in it that only show up when you can hold every frame at once, and to check each one against something that isn't me: the music, the physics, or more data.</p>
+<p>Some of it worked. Some of it was wrong the first time. One part didn't work at all. All three are here.</p>
+
+<h2><small>Act one · ribbons</small>The shapes in the air</h2>
+<p>Stack every frame of a second and a half on top of each other, keep only the moving blue silk, and colour it by time, blue first and amber last. What comes out is the drawing the ribbon was making, which nobody in the audience ever sees whole.</p>
+<figure class="bleed"><img src="scurves.jpg" alt="Three dancers, each surrounded by a glowing S-shaped or question-mark-shaped trail of ribbon, blue fading to amber."><figcaption>Clip 24, 10.5 to 12 seconds. The little rungs inside each curve are single frames; where they're far apart, the silk was moving fast.</figcaption></figure>
+<div class="pair">
+  <figure><img src="heart.jpg" alt="The dancers clustered together, their ribbons forming one large heart-shaped glow around them."><figcaption>Clip 27, first 1.5 s: they start bunched together, and the silks make one big shape.</figcaption></figure>
+  <figure><img src="wings.jpg" alt="One dancer standing in the middle with a pair of glowing wing shapes on either side."><figcaption>Clip 26, 22.5 to 24 s: by the end, wings.</figcaption></figure>
+</div>
+<p>Then I asked whether the dancers move with the music. The song is a steady <span class="num">100</span> beats per minute: all four ribbon clips measured between <span class="num">99.95</span> and <span class="num">100.00</span>. The ribbons mostly rise and fall once every <span class="num">1.1–1.3</span> seconds, which is two beats.</p>
+<p>Here I caught myself. In one six-second stretch of the first clip, the middle dancer's ribbon peaked at almost exactly the same point in the music every time, and the dancer on the right was half a beat behind her, every time. It was a lovely, tidy finding. Then I ran the same test across all four clips, whole, and it fell apart. Over full clips the peaks scatter (lock strength 0.07 to 0.62, where 1 would be perfect). The tidy version came from the six seconds I happened to pick.</p>
+<p class="verdict">The song is 100 bpm and the ribbons mostly swing once per two beats. The "half a beat behind" pattern was real for six seconds only.</p>
+<p>A rough speed, too: the circles in the air are about 1.4 m in radius (sized from a standing dancer), and the fastest parts of the silk move at least 2.5 to 4 m/s. That's a floor, because the method undercounts thin, fast, blurred things.</p>
+
+<h3 style="font:600 22px/1.2 Fraunces,Georgia,serif;margin:40px 0 8px">The whole dance at once</h3>
+<p>One more way of holding it all at once. For every frame, count how much ribbon is at each point across the stage, and lay the frames side by side, so time runs left to right. The choreography turns into a braid.</p>
+<figure class="bleed"><img src="score.jpg" alt="Two long horizontal images. In the first, a single glowing strand on the left splits into three braided strands, which run on and then merge back into one. In the second, one strand splits into three about a third of the way along."><figcaption>Top: clip 26. Bottom: clip 27. Up and down is position across the stage; left to right is time, blue to amber. Each little diamond is one swing of a ribbon, often about two beats long, though not reliably so.</figcaption></figure>
+<p>In clip 26 the three dancers start together as one strand, split into three by about three seconds in, hold that for thirteen seconds, then fold back into one: that's the moment the wings form. Clip 27 starts as one strand (the heart) and splits around eight seconds. One ends merged and the next begins merged, which fits the clips being filmed nearly back to back.</p>
+<p>I also tested whether the braid's changes line up with changes in the music. In one clip out of four they did, and over all four, no better than chance. Phone audio with a crowd around it is too blunt to find the song's sections, so this is a "can't tell", not a "no".</p>
+
+<h2><small>Act two · the hoop</small>A pendulum you can weigh with a stopwatch</h2>
+<div class="side">
+  <div>
+    <p>The hoop hangs from the top of a tripod standing in the pool. I measured the rope's angle in every frame, relative to one of the tripod's legs so the camera's wobble cancels out. In all five hoop clips the rope sways about ±3 degrees, slowly: <span class="num">19</span> swings measured, averaging <span class="num">4.2 s</span> each.</p>
+    <p>A pendulum's period fixes its length: <span class="num">L = gT²/4π²</span>. A 4.2-second swing means about <span class="num">4.3 m</span> from the pivot to the centre of mass.</p>
+    <p>Then the check against the picture. In a frame where the hoop faces the camera, it's <span class="num">252</span> pixels across, and the distance from the top of the tripod down to the performers is about 3.8 to 4 hoop widths. Aerial hoops are usually 85 cm to 1 m, so the picture says <span class="num">3.2–4.0 m</span>.</p>
+  </div>
+  <img src="hoop_frame.jpg" alt="The tripod rig over the pool: the rope comes down from the apex to a pair of straps and the hoop, with two performers in and below it.">
+</div>
+<figure class="chart"><img src="hoop_sway.png" alt="Line chart of the rope angle over 20 seconds, rising and falling about every four seconds."></figure>
+<p>So physics and picture agree on the size, but the swing is 10 to 25% slower than the picture says it should be. My best guess, not yet tested: through much of the act one of the two hangs below the hoop, legs down, which drops the pair's centre of mass to about 4.3 hoop-widths below the pivot. That would close the gap, and it predicts the sway should slow when one of them hangs low and quicken when both are up in the hoop. I tried anyway. Over 41 half-swings, the ones where the performers' blue costumes sat lowest took <span class="num">2.14 s</span> on average and the ones where they sat highest took <span class="num">1.97 s</span>: about 9% slower when lower. From the depths alone, a pendulum should have been about 5% slower. So it's the right direction and about the right size, but with this much noise it could still be chance (about a 7% probability).</p>
+<p class="verdict">The sway says the rig is about 4.3 m from pivot to performers; the picture says 3.2 to 4 m. Close. The likely explanation for the gap leans the right way in the data, but doesn't prove itself.</p>
+
+<h2><small>Act three · the hand-balancer</small>The point that doesn't move</h2>
+<p>For 25 seconds she balances on her hands on a small round platform, while her legs go through one shape after another: straight up, split, folded over her head, swept out sideways. I outlined her in every frame and found the centre of each outline.</p>
+<figure><img src="balance.jpg" alt="Eight outlines of the balancer at different moments, all aligned on her wrists. The outlines spread widely, but the eight white dots marking each outline's centre sit in a tight cluster just above her hands."><figcaption>Eight moments, lined up on her wrists. The shapes are all over the place. The dots, each outline's centre, are not.</figcaption></figure>
+<p>Over the whole clip, her outline's far edge swings by about 300 pixels, nearly a metre. The centre stays within about 25 pixels of her wrists. In the steadiest ten seconds it moves by about 8 pixels, which is about a centimetre and right at the limit of what the outline can resolve. As her legs go out one way, something else goes the other, and the balance point stays put.</p>
+<figure class="chart"><img src="balance_chart.png" alt="Chart: a wide shaded band showing the extent of her outline over time, and inside it a nearly flat red line for its centre."></figure>
+<p>I nearly measured the light show instead. My first version took her hand position from the pixels right at the platform's edge, and the centre seemed to jump back and forth every 2.7 seconds in a perfect square wave. That was the LED ring changing colour and lighting her hands differently. Measuring from her wrists, a few centimetres higher, made it vanish.</p>
+<p class="verdict">The shape changes by a metre; the balance point stays within a hand's width of her wrists, and when she holds still, within about a centimetre.</p>
+
+<h2><small>Between acts · the lights</small>Not quite in time</h2>
+<p>During the balancing act the stage wash ramps from blue to magenta and snaps back, over and over. It's very regular: every <span class="num">0.565 s</span>, with less than a hundredth of a second of scatter, which is about 106 flashes a minute. The music under it is about 104 bpm.</p>
+<figure class="chart"><img src="lights_drift.png" alt="Chart: the timing of each light flash measured against the music's beat, drifting steadily downward instead of staying flat."></figure>
+<p>If the lights were following the music, each flash would land at the same point in the beat. Instead they slide steadily against it, losing about half to a whole beat over twenty seconds. The lights run on their own clock, set close enough to the song's tempo that they seem to pulse with it, but they don't.</p>
+<p class="verdict">The lights look synced to the music. They aren't: they're slightly faster, and they drift.</p>
+
+<h2><small>The miss</small>Fire</h2>
+<p>Flames have a heartbeat. A fire of diameter D puffs at roughly <span class="num">1.5/√D</span> times a second, so a torch head of 5 to 10 cm should flicker 5 to 7 times a second, easily within what a phone records. I measured the flame size of four torches frame by frame. There was no clear peak there, just a hump at about 2 per second, which is most likely the performers waving the torches to the music. In stretches where a torch was held still I got 5.4, 2.9 and 2.5. That's three different answers, so no answer.</p>
+<p class="verdict no">No finding. A fixed fire bowl and a minute of steady footage might do it.</p>
+
+<hr>
+<h2><small>What I'm taking away</small>Looking, not describing</h2>
+<p>Every result here that held up held up because something outside me could disagree: the beat, a pendulum's period, the wrist line, more clips. Several first answers were wrong in ways that looked right: the six tidy seconds of ribbon timing, the square-wave wobble that was really the lights, a lit slide my fire detector counted as a flame, and a caption claiming every swing took two beats. Each was caught the same way: by measuring again with something that didn't share my first guess.</p>
+<p>And the most beautiful thing here, the drawings in the air, wasn't a finding at all. It's what a second and a half looks like if you can see all of it at once.</p>
+</main>
+<footer>Made for C.S. on 26 November 2026, from fourteen clips he filmed at a resort show in Mexico. Every image is built from his frames. Method notes, numbers and the false starts are in the session log.</footer>
+</body>
+</html>
