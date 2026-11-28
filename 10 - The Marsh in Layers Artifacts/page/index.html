@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cabin in layers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* VOICE: quiet field notes, one listener to another; honest about what's unknown
+   IDEA: a field-recordist's mixing strip: each layer of the marsh on its own fader
+   PICTURE: the layered spectrogram, then a live mixer for each clip
+   COLOUR and TYPE: night-marsh green ground, birch-gold birds, pond-teal frogs, ember hum; Fraunces + Inter
+   LAYOUT: title band, full-width picture, two clip mixers, findings, open question */
+:root{color-scheme:dark;--bg:#101614;--panel:#17201d;--line:#2a3632;--ink:#e9ede6;--mute:#a3aea8;
+--birds:#f2c14e;--frogs:#5fd0b0;--hum:#ff8a65;--wind:#9fb3c8}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 Inter,system-ui,sans-serif;overflow-x:clip}
+.band{padding:clamp(28px,4vw,56px) max(5vw,16px);max-width:1240px;margin:0 auto}
+h1{font:600 clamp(32px,5vw,50px)/1.05 Fraunces,Georgia,serif;margin:0 0 12px;text-wrap:balance}
+h2{font:600 26px/1.15 Fraunces,Georgia,serif;margin:0 0 10px}
+.lede{color:var(--mute);max-width:66ch;margin:0}
+figure{margin:0}figure img{width:100%;height:auto;display:block;border-radius:6px}
+figcaption{color:var(--mute);font-size:14px;margin-top:8px;max-width:80ch}
+.mixers{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:20px}
+.mx{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:20px}
+.mx p{color:var(--mute);font-size:15px;margin:4px 0 16px}
+.ch{display:flex;align-items:center;gap:12px;padding:8px 0;border-top:1px solid var(--line)}
+.ch label{flex:1;font-weight:600}
+.ch input[type=range]{flex:2;accent-color:var(--c);height:44px}
+.dot{width:12px;height:12px;border-radius:50%;background:var(--c);flex:none}
+.row{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+button{font:600 15px Inter,sans-serif;min-height:44px;padding:0 18px;border-radius:22px;border:1px solid var(--line);background:#22302b;color:var(--ink);cursor:pointer}
+button:hover{background:#2b3c36}button:focus-visible,input:focus-visible{outline:2px solid var(--birds);outline-offset:2px}
+button.on{background:var(--ink);color:var(--bg)}
+.status{font-size:13px;color:var(--mute);align-self:center}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:28px}
+.f{border-left:3px solid var(--c);padding-left:14px}
+.f h3{margin:0 0 4px;font-size:17px}.f p{margin:0;color:var(--mute)}
+.ask{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:22px}
+.small{font-size:13px;color:var(--mute)}
+</style></head><body>
+
+<section class="band">
+<h1>Spring at the cabin, heard in layers</h1>
+<p class="lede">Two phone clips from the beaver ponds, May 16, 2025: a quiet one over the marsh, and a louder one past the spruce, 18 dB louder and full of frogs. Each one splits cleanly by pitch into separate layers, so you can listen to them one at a time.</p>
+</section>
+
+<section class="band" style="padding-top:0">
+<figure><img src="soundscape.png" alt="Spectrograms of both clips with birds, frogs, an engine hum and wind marked as separate pitch bands" width="1223" height="991">
+<figcaption>Pitch on a log scale, time across. Colour is loudness compared with that pitch's usual level, so quiet layers still show. Circles in A trace the hum's pitch.</figcaption></figure>
+</section>
+
+<section class="band" style="padding-top:0">
+<h2>Mixer</h2>
+<p class="lede" style="margin-bottom:18px">Press play, then drag a layer down to take it out of the mix. Each layer is a band-pass filtered copy of the recording.</p>
+<div class="mixers" id="mixers"></div>
+</section>
+
+<section class="band">
+<h2>What the recordings show</h2>
+<div class="grid2">
+<div class="f" style="--c:var(--birds)"><h3>Birds, above 3 kHz</h3><p>In A: a fast trill near 5 kHz (about 20 notes a second), then four sweeps falling from 8 to 5 kHz, each about 0.2 s apart. I couldn't identify the species and won't guess.</p></div>
+<div class="f" style="--c:var(--frogs)"><h3>Frogs, 0.5–2.5 kHz</h3><p>In B: short notes about 0.1 s long, with energy near 0.5, 1–1.5 and 2 kHz, some rising then falling. That fits wood frogs' clucking, but I haven't confirmed it. Boreal chorus frogs are the other likely candidate.</p></div>
+<div class="f" style="--c:var(--hum)"><h3>A hum, 54 → 94 Hz (only in A)</h3><p>A steady low tone rises from about 54 Hz to 88 Hz over three seconds, then creeps up to 94 Hz. It's 4 dB louder on the right. It sounds like an engine speeding up: 88 Hz would be roughly 1,760 rpm for a six-cylinder. Most phone speakers can't play it, so there's a copy shifted up 300 Hz.</p></div>
+<div class="f" style="--c:var(--wind)"><h3>Wind and handling (in B)</h3><p>B's low band jumps between 41 and 105 Hz from moment to moment, with no steady tone. That's gusts or the phone moving, not the engine.</p></div>
+</div>
+<p class="small" style="margin-top:22px">What I tried and dropped: counting individual frogs by pitch (too noisy), and testing whether frogs time their calls to avoid each other. The note detector broke at this chorus density, so I have no finding either way.</p>
+</section>
+
+<section class="band" style="padding-top:0">
+<div class="ask"><h2>One question for you</h2><p class="lede">In the marsh view (A), what's off to the right? A road, a neighbour's yard, a quad trail? The hum rises like a vehicle accelerating away, and knowing what's there would confirm it or rule it out.</p></div>
+</section>
+
+<script>
+{
+const clips=[
+ {id:'a',name:'A · marsh view',note:'9 s, quiet. Birds up high, a hum down low.',layers:[['birds','Birds','--birds'],['frogs','Frogs','--frogs'],['engine','Hum','--hum']],extra:['a_engine_shifted_up_300Hz','Hum shifted up 300 Hz']},
+ {id:'b',name:'B · pond past the spruce',note:'14 s, 18 dB louder. Frogs everywhere.',layers:[['birds','Birds','--birds'],['frogs','Frogs','--frogs'],['wind_low','Wind / handling','--wind']]}
+];
+const host=document.getElementById('mixers');
+host.innerHTML=clips.map(c=>`<div class="mx" id="mx-${c.id}"><h2>${c.name}</h2><p>${c.note}</p>
+${c.layers.map(([k,l,v])=>`<div class="ch" style="--c:var(${v})"><span class="dot"></span><label for="g-${c.id}-${k}">${l}</label><input type="range" id="g-${c.id}-${k}" min="0" max="1" step="0.01" value="1" data-k="${k}"></div>`).join('')}
+<div class="row"><button data-act="play">Play mix</button><button data-act="full">Original</button>${c.extra?`<button data-act="extra">${c.extra[1]}</button>`:''}<span class="status"></span></div></div>`).join('');
+let ctx=null;const bufs={};let playing=null;
+async function buf(name){if(bufs[name])return bufs[name];const r=await fetch(name+'.mp3');bufs[name]=await ctx.decodeAudioData(await r.arrayBuffer());return bufs[name]}
+function stop(){if(playing){playing.srcs.forEach(s=>{try{s.stop()}catch(e){}});playing.btn.classList.remove('on');playing=null}}
+clips.forEach(c=>{
+ const box=document.getElementById('mx-'+c.id),st=box.querySelector('.status');const gains={};
+ box.querySelectorAll('input[type=range]').forEach(i=>i.addEventListener('input',()=>{if(gains[i.dataset.k])gains[i.dataset.k].gain.value=+i.value}));
+ box.querySelectorAll('button').forEach(b=>b.addEventListener('click',async()=>{
+  const was=playing&&playing.btn===b;stop();if(was)return;
+  try{ctx=ctx||new (window.AudioContext||window.webkitAudioContext)();await ctx.resume();
+   st.textContent='loading…';
+   let names=b.dataset.act==='play'?c.layers.map(l=>c.id+'_'+l[0]):b.dataset.act==='full'?[c.id+'_full']:[c.extra[0]];
+   const bs=await Promise.all(names.map(buf));st.textContent='';
+   const t0=ctx.currentTime+0.05,srcs=[];
+   bs.forEach((bf,j)=>{const s=ctx.createBufferSource();s.buffer=bf;const g=ctx.createGain();
+    if(b.dataset.act==='play'){const k=c.layers[j][0];g.gain.value=+box.querySelector(`[data-k="${k}"]`).value*0.6;gains[k]=g}
+    s.connect(g).connect(ctx.destination);s.start(t0);srcs.push(s)});
+   b.classList.add('on');playing={srcs,btn:b};srcs[0].onended=()=>{if(playing&&playing.btn===b)stop()};
+  }catch(e){st.textContent='Audio could not start here.'}
+ }));
+ // slider gain scaling: keep 0.6 headroom for summed stems
+ box.querySelectorAll('input[type=range]').forEach(i=>i.addEventListener('input',()=>{if(gains[i.dataset.k])gains[i.dataset.k].gain.value=+i.value*0.6}));
+});
+}
+</script>
+</body></html>
