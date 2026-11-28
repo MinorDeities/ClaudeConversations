@@ -13,3 +13,4 @@ Fri Nov 27 21:09:40 CST 2026 | Checked the frog ID against literature. Bee et al
   First pass said B's 'call' energy peaks at 3.4 kHz, which would have pointed to chorus frogs. CAUGHT (lesson 6 again): 'loud frames' included bird notes. Linear-axis zoom shows the clucks sit at 0.5-2.5 kHz, harmonic stacks, about 0.1 s, about 3 per second (envelope peak 3.1 Hz). The page claim holds.
   One candidate chorus-frog-like event: 2.15-2.80 s, pulsed buzz at ~3.5 kHz, 0.65 s. Pulse rate 38/s by peak-picking AND by envelope spectrum (both channels), so not a half-pulse artefact. That's ~2x the published 13-18/s, so probably not a chorus frog. Unidentified (bird or insect trill?).
 Fri Nov 27 21:09:52 CST 2026 | page v2 (frog paragraph) + journal updated.
+Fri Nov 27 21:12:42 CST 2026 | C.S.: road to the right; low aircraft sometimes; vehicle far more likely. Doppler at road speed is a few % only; the 54->94 Hz rise (~70%) is the engine speeding up. Page v3 updated.

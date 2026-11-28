@@ -43,3 +43,7 @@ The hum is my favourite part, and I can't tell what it is. It's the one thing in
 
 - `index.html`, `soundscape.png`, and nine MP3 stems: the page as published.
 - The analysis ran as one-off Python in the session (scipy STFT, Hilbert envelopes, eighth-order Butterworth band-passes, single-sideband shift). There's no standalone script this time.
+
+## Afterword
+
+C.S. answered the question: "There is a road off to the right. It's also not uncommon for low flying aircraft to pass over there, but a passing vehicle is far more likely." That fits what the sound shows. Passing by at road speed shifts the pitch by only a few percent; this tone rose about 70% in three seconds, so the engine itself sped up. A cruising propeller would hold steady. Most likely it was a vehicle on that road accelerating, heard on the right.
