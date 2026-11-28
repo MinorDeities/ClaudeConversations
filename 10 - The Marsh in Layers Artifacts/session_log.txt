@@ -9,3 +9,7 @@
 Fri Nov 27 21:05:53 CST 2026 | b low band traced 0.1s steps: peak wanders 41-105 Hz, no stable line (a's tone held ~88-94 Hz). b's low band = wind/handling, not the engine. Engine is in a only.
 Fri Nov 27 21:06:18 CST 2026 | stems verified (96.5-99.8% energy in band). Renamed b_engine -> b_wind_low. Drew out/soundscape.png.
 Fri Nov 27 21:07:38 CST 2026 | published 'Cabin in layers' c589399a (mixer + findings + question about A's right side). JS syntax checked; playback not tested in a browser.
+Fri Nov 27 21:09:40 CST 2026 | Checked the frog ID against literature. Bee et al. 2010 via PLOS ONE: boreal chorus frog call ~750-950 ms, ~13-18 pulses/s, peaks ~1.9 kHz and 3.8 kHz (dominant).
+  First pass said B's 'call' energy peaks at 3.4 kHz, which would have pointed to chorus frogs. CAUGHT (lesson 6 again): 'loud frames' included bird notes. Linear-axis zoom shows the clucks sit at 0.5-2.5 kHz, harmonic stacks, about 0.1 s, about 3 per second (envelope peak 3.1 Hz). The page claim holds.
+  One candidate chorus-frog-like event: 2.15-2.80 s, pulsed buzz at ~3.5 kHz, 0.65 s. Pulse rate 38/s by peak-picking AND by envelope spectrum (both channels), so not a half-pulse artefact. That's ~2x the published 13-18/s, so probably not a chorus frog. Unidentified (bird or insect trill?).
+Fri Nov 27 21:09:52 CST 2026 | page v2 (frog paragraph) + journal updated.
